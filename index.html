@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ジャルプロ スーパーハイドロLP - First Clinic (ファーストクリニック)</title>
     
-    <!-- Google Fonts (実サイトと同じフォント) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300&family=Petit+Formal+Script&family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300;600&family=Petit+Formal+Script&family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         /* --- Base Styles --- */
@@ -19,7 +19,6 @@
             --bg-color: #ffffff;
             --section-bg: #fcfbf9;
             --white: #ffffff;
-            /* フォント定義 */
             --font-mincho: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
             --font-gothic: "Zen Kaku Gothic New", "Helvetica Neue", sans-serif;
             --font-en-script: "Petit Formal Script", cursive;
@@ -53,7 +52,7 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             margin: 0;
             font-weight: normal;
         }
@@ -86,7 +85,23 @@
             z-index: 2;
         }
 
-        /* --- Animation --- */
+        /* --- Animation Definitions --- */
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); box-shadow: 0 5px 20px rgba(181, 141, 134, 0.3); }
+            50% { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(181, 141, 134, 0.4); }
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
@@ -114,13 +129,13 @@
             transition: all 0.4s ease;
             text-align: center;
             font-family: var(--font-gothic);
-            box-shadow: 0 5px 20px rgba(181, 141, 134, 0.3);
             border: 1px solid rgba(255,255,255,0.3);
             width: 100%;
             box-sizing: border-box;
             letter-spacing: 0.08em;
             position: relative;
             overflow: hidden;
+            animation: floating 3s ease-in-out infinite;
         }
 
         .btn::after {
@@ -131,16 +146,12 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
+            animation: shine 4s infinite;
         }
 
-        .btn:hover::after {
-            left: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(181, 141, 134, 0.4);
+        .btn:active {
+            transform: scale(0.98);
+            filter: brightness(1.1);
         }
 
         .btn-large {
@@ -148,7 +159,66 @@
             font-weight: bold;
         }
 
-        /* セクションタイトル周りのデザイン */
+        /* Instagram Link Style */
+        .insta-link {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .insta-link.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .insta-link:active {
+            transform: scale(0.97);
+            background: #fafafa;
+        }
+
+        .insta-icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .insta-text-box {
+            text-align: left;
+        }
+
+        .insta-label {
+            display: block;
+            font-size: 0.75rem;
+            color: #888;
+            font-family: var(--font-gothic);
+            margin-bottom: 2px;
+        }
+
+        .insta-main-text {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: bold;
+            font-family: var(--font-gothic);
+        }
+
         .title-area {
             text-align: center;
             margin-bottom: 40px;
@@ -192,7 +262,7 @@
         }
 
         .logo-img {
-            height: 40px; /* ロゴサイズ調整 */
+            height: 40px;
             width: auto;
         }
 
@@ -204,16 +274,21 @@
             color: var(--primary-color);
             border: 1px solid var(--primary-color);
             box-shadow: none;
-            border-radius: 50px; /* 実サイトに合わせて丸く */
+            border-radius: 50px;
             font-family: var(--font-gothic);
+            animation: none;
+        }
+        
+        .header-cta::after {
+            animation: shine 5s infinite;
         }
 
-        /* --- Hero Section (FV) --- */
+        /* --- Hero Section --- */
         .hero {
             position: relative;
             padding: 100px 20px;
             text-align: center;
-            min-height: 550px; /* 画像が見えるように高さを確保 */
+            min-height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -221,7 +296,6 @@
             color: var(--text-color);
         }
 
-        /* 実際のFV画像を背景に設定 */
         .hero-bg {
             position: absolute;
             top: 0;
@@ -234,27 +308,23 @@
             z-index: 0;
         }
 
-        /* 画像の上に白いフィルターをかけて文字を読みやすくする */
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.4); /* 透明度調整 */
             background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.8) 100%);
             z-index: 1;
         }
 
         .hero-content {
-            /* ガラスモーフィズム風ではなく、シンプルに文字を浮かせる */
             position: relative;
             z-index: 2;
             padding: 20px;
             text-shadow: 0 0 20px rgba(255,255,255,0.8);
         }
         
-        /* キャッチコピー */
         .hero-catch-en {
             font-family: var(--font-en-script);
             font-size: 1.8rem;
@@ -277,7 +347,7 @@
             font-weight: 600;
         }
 
-        /* --- Sympathy (Marble Texture) --- */
+        /* --- Sympathy --- */
         .sympathy {
             padding: 80px 0;
             text-align: center;
@@ -285,7 +355,6 @@
             background-color: #fff;
         }
         
-        /* 大理石風の背景装飾画像 */
         .marble-deco {
             position: absolute;
             top: -50px;
@@ -300,14 +369,12 @@
             background-color: #fbfbfb;
             padding: 30px 25px;
             border: 1px solid #f0f0f0;
-            margin-top: 30px;
-            text-align: left;
-            margin-left: 20px;
-            margin-right: 20px;
+            margin: 30px 20px 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             border-radius: 8px;
             position: relative;
             z-index: 1;
+            text-align: left;
         }
 
         .check-list li {
@@ -348,8 +415,13 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.03);
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease;
         }
         
+        .feature-card.visible {
+            animation: cardFloat 5s ease-in-out infinite;
+        }
+
         .feature-card::before {
             content: '';
             position: absolute;
@@ -378,7 +450,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* --- Authority (Dr. Abe) --- */
+        /* --- Authority --- */
         .authority {
             padding: 80px 0;
             background: #fff;
@@ -400,12 +472,11 @@
             position: relative;
         }
         
-        /* 実際のHPの写真デザイン（窓枠風）をイメージ */
         .dr-image img {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 8px 8px 0 0; /* 上だけ丸く */
+            border-radius: 8px 8px 0 0;
         }
 
         .dr-text {
@@ -425,22 +496,9 @@
             color: var(--text-color);
             font-weight: 500;
         }
-        
-        .concept-badge {
-            display: inline-block;
-            background: #fff;
-            border: 1px solid var(--accent-color);
-            color: var(--text-color);
-            padding: 4px 15px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            margin-bottom: 15px;
-            letter-spacing: 0.1em;
-        }
 
         /* --- Price --- */
         .price-section {
-            /* 実際のHPのPRICEセクション背景画像を使用 */
             background-image: url('https://firstclinic-tokyo.com/fc/wp-content/uploads/2025/03/price_ph02.jpg');
             background-size: cover;
             background-position: center;
@@ -456,7 +514,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.9); /* 背景画像を薄くする */
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .price-table {
@@ -472,22 +530,64 @@
 
         .price-table tr {
             border-bottom: 1px solid #f0f0f0;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 25px 20px;
         }
 
         .price-table th {
             color: #888;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-weight: normal;
             font-size: 0.9rem;
             letter-spacing: 0.05em;
         }
 
-        .special-price {
-            color: var(--primary-color); 
-            font-size: 1.6rem !important;
+        .price-display {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-color);
+        }
+
+        /* 初回限定バッジ */
+        .price-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 50px;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+            font-family: var(--font-gothic);
+        }
+
+        /* 料金の数字部分 */
+        .price-num {
             font-family: var(--font-en-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        /* 強調用の大きな数字 */
+        .price-num.large {
+            font-size: 2.4rem;
+        }
+
+        /* 料金の単位部分（円） */
+        .price-unit {
+            font-family: var(--font-mincho);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .special-color {
+            color: var(--primary-color);
         }
 
         /* --- Flow --- */
@@ -540,6 +640,12 @@
             background: #e0e0e0;
         }
 
+        /* --- FAQ --- */
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+
         /* --- Footer --- */
         .cta-section {
             background-color: #fff;
@@ -566,6 +672,8 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.08);
             transform: translateY(-50px);
             border: 1px solid #f0f0f0;
+            overflow: hidden;
+            position: relative;
         }
         
         .footer-info p {
@@ -585,12 +693,11 @@
 </head>
 <body>
 
-    <!-- Mobile Wrapper starts here -->
     <div class="mobile-wrapper" id="scrollContainer">
 
+        <!-- HEADER -->
         <header>
             <div class="container header-inner">
-                <!-- 実際のロゴ画像 -->
                 <a href="#">
                     <img src="https://firstclinic-tokyo.com/fc/wp-content/themes/fc/assets/images/logo.svg" alt="First Clinic" class="logo-img">
                 </a>
@@ -598,11 +705,10 @@
             </div>
         </header>
 
+        <!-- HERO -->
         <section class="hero">
-            <!-- 実際のFV画像背景 -->
             <div class="hero-bg"></div>
             <div class="hero-overlay"></div>
-
             <div class="hero-content fade-in-up">
                 <p class="hero-catch-en">Skin Lifting & Tightening</p>
                 <h1>土台から、引き上げる。<br><span class="hero-gold-text">リガメント再生</span>で叶える、<br>たるみ・肌質改善。</h1>
@@ -611,29 +717,26 @@
             </div>
         </section>
 
+        <!-- CONCERN -->
         <section class="sympathy container">
-            <!-- 実際の背景装飾として使われている大理石風画像などを配置 -->
             <img src="https://firstclinic-tokyo.com/fc/wp-content/uploads/2025/03/concept_ph01-1000x1731.jpg" class="marble-deco" alt="" style="top: 20px; right: -80px; width: 200px; opacity: 0.2; transform: rotate(15deg);">
-
             <div class="title-area fade-in-up">
                 <span class="en-title">Concern</span>
                 <h2 class="section-title">「最近、顔が下がって<br>きた気がする…」<br>と感じていませんか？</h2>
             </div>
-            
             <p style="text-align: center;" class="fade-in-up delay-100">そのお悩みは、肌表面だけでなく、肌を支える「リガメント（靭帯）」の衰えが原因かもしれません。</p>
-            
             <ul class="check-list fade-in-up delay-200">
                 <li>フェイスラインのもたつきが気になる</li>
                 <li>ほうれい線が深く目立つようになってきた</li>
                 <li>肌のハリがなくなり、疲れて見える</li>
                 <li>自然にリフトアップしたい</li>
             </ul>
-
             <div style="text-align: center; margin-top: 40px;" class="fade-in-up delay-300">
                 <p>だからこそ必要なのは、肌の土台である<br><strong>「リガメント」を強化・再生する治療</strong>です。</p>
             </div>
         </section>
 
+        <!-- ABOUT -->
         <section class="about">
             <div class="container">
                 <div class="title-area fade-in-up">
@@ -641,7 +744,6 @@
                     <h2 class="section-title">ジャルプロ<br>スーパーハイドロとは</h2>
                     <p style="margin-top: 10px;">リガメント再生×肌育で叶える<br>次世代ECM製剤</p>
                 </div>
-
                 <div class="features-grid">
                     <div class="feature-card fade-in-up">
                         <span class="feature-num">01</span>
@@ -662,27 +764,23 @@
             </div>
         </section>
 
+        <!-- DOCTOR -->
         <section class="authority container">
             <div class="title-area fade-in-up">
                 <span class="en-title">Doctor</span>
                 <h2 class="section-title">First Clinicが<br>選ばれる理由</h2>
                 <p style="margin-top: 10px;">お客様ファーストのオーダーメイド治療</p>
             </div>
-
             <div class="dr-profile fade-in-up">
-                <!-- 実際のドクター画像 -->
                 <div class="dr-image">
                     <img src="https://firstclinic-tokyo.com/fc/wp-content/uploads/2025/11/阿部先生_窓.png" alt="阿部 舞香 医師">
                 </div>
-                
                 <div class="dr-text">
                     <div style="text-align:center; margin-bottom:15px; margin-top: 25px;">
                         <span class="dr-name-en">Maika Abe</span>
                         <h3 style="border:none; margin:0; padding:0; font-family:var(--font-mincho);">阿部 舞香 医師</h3>
                     </div>
-                    
                     <p>「お客様ファースト」をモットーに、最新治療をいち早く、リーズナブルにご提供いたします。一人ひとりの骨格や肌質に合わせたオーダーメイドの注入で、あなた本来の美しさを引き出します。</p>
-                    
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
                         <h4 style="color:var(--primary-color); font-weight:normal; margin-bottom:10px;">リフトアップ専門の技術</h4>
                         <p>スーパーハイドロの効果を最大化させるため、リガメントの位置を正確に捉え、最適な層へ注入します。痛みや内出血にも配慮した丁寧な施術をお約束します。</p>
@@ -691,88 +789,113 @@
             </div>
         </section>
 
+        <!-- CTA & INSTAGRAM -->
         <section class="cta-section">
             <div class="fade-in-up">
                 <h2 style="font-size: 1.4rem; color: var(--text-color); margin-bottom: 20px;">「本当に効果はあるの？」<br>迷っている方も</h2>
                 <p>無理な勧誘は一切ございません。<br>あなたの肌にとって、今一番必要なケアを一緒に考えましょう。</p>
+                
                 <a href="#reservation" class="btn btn-large" style="margin-top: 20px;">無料カウンセリングを予約する</a>
+
+                <!-- Instagram誘導 -->
+                <a href="https://www.instagram.com/dr_maika.abe_beauty/" target="_blank" class="insta-link fade-in-up delay-200">
+                    <div class="insta-icon-circle">
+                        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </div>
+                    <div class="insta-text-box">
+                        <span class="insta-label">親しみやすい人柄が人気</span>
+                        <span class="insta-main-text">インスタで舞香先生のイメージを確認！</span>
+                    </div>
+                    <div style="margin-left: auto; color: #ccc;">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+                    </div>
+                </a>
+                <p style="margin-top: 15px; color: #888; font-size: 0.8rem;">※実際の施術風景や日常を公開中</p>
             </div>
         </section>
 
+        <!-- PRICE -->
         <section class="price-section">
             <div class="container">
                 <div class="title-area fade-in-up" style="position: relative; z-index: 1;">
                     <span class="en-title">Price</span>
                     <h2 class="section-title">施術料金</h2>
+                    <p style="margin-top: 10px;">分かりやすい都度払い制</p>
                 </div>
-                
                 <table class="price-table fade-in-up">
-                    <tr>
-                        <th>ジャルプロ（初回）</th>
-                        <td class="special-price">39,800円〜</td>
+                    <tr style="background-color: #fcfbf9;">
+                        <th>
+                            <span class="price-badge">初回限定</span><br>
+                            ジャルプロ初回価格
+                        </th>
+                        <td>
+                            <div class="price-display special-color">
+                                <span class="price-num large">39,800</span>
+                                <span class="price-unit">円</span>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <th>ジャルプロ（1回）</th>
-                        <td style="font-size: 1.1rem; font-weight: bold;">〇〇,〇〇〇円</td>
-                    </tr>
-                    <tr>
-                        <th>お得なコース</th>
-                        <td style="font-size: 1.1rem; font-weight: bold;">詳しくはカウンセリングで</td>
+                        <th style="padding-top: 30px;">通常価格（1回）</th>
+                        <td style="padding-top: 5px;">
+                            <div class="price-display">
+                                <span class="price-num">59,800</span>
+                                <span class="price-unit">円</span>
+                            </div>
+                        </td>
                     </tr>
                 </table>
-                <p class="fade-in-up" style="position: relative; z-index: 1;"><small>※税込価格です。製剤の種類（クラシック/スーパーハイドロ）による料金詳細は院内にてご確認ください。</small></p>
+                <p class="fade-in-up" style="position: relative; z-index: 1;"><small>※税込価格です。製剤の種類や注入部位による詳細についてはカウンセリングにてご案内いたします。</small></p>
             </div>
         </section>
 
+        <!-- FLOW -->
         <section class="flow-section">
             <div class="container">
                 <div class="title-area fade-in-up">
                     <span class="en-title">Flow</span>
                     <h2 class="section-title">施術の流れ</h2>
                 </div>
-
                 <div class="flow-box fade-in-up delay-100">
                     <ol class="flow-list">
                         <li><strong>カウンセリング：</strong><br>お悩みやご希望を丁寧にお伺いし、最適な注入ポイントをご提案します。</li>
-                        <li><strong>洗顔・麻酔：</strong><br>メイクを落としていただきます。ご希望により麻酔クリームを使用（別途）します。</li>
-                        <li><strong>施術：</strong><br>気になる部位へ丁寧に注入します（約15〜20分）。Vリフト法など最適な手法を用います。</li>
+                        <li><strong>洗顔・麻酔：</strong><br>メイクを落としていただきます。ご希望により麻酔クリームを使用します。</li>
+                        <li><strong>施術：</strong><br>気になる部位へ丁寧に注入します。Vリフト法など最適な手法を用います。</li>
                         <li><strong>終了：</strong><br>メイクルームで整えてご帰宅。直後からメイク可能です。</li>
                     </ol>
                 </div>
             </div>
         </section>
 
+        <!-- FAQ -->
         <section class="cta-section" style="padding-top: 0;">
-             <h2 class="section-title fade-in-up" style="display: block; text-align: center; margin-bottom: 30px;">よくあるご質問</h2>
-            
+            <h2 class="section-title fade-in-up" style="display: block; text-align: center; margin-bottom: 30px;">よくあるご質問</h2>
             <div style="text-align: left; max-width: 100%;">
-                <div style="border-bottom: 1px solid #eee; padding: 20px 0;" class="fade-in-up">
+                <div class="faq-item fade-in-up">
                     <span style="display:block; font-weight:bold; color:var(--text-color); margin-bottom:10px;">Q. プロファイロとの違いは何ですか？</span>
-                    <p style="margin:0; font-size:0.9rem;">A. どちらもECM（細胞外マトリックス）製剤ですが、ジャルプロスーパーハイドロは特に「リガメント（靭帯）の強化」に優れており、リフトアップ効果をより重視したい方におすすめです。</p>
+                    <p style="margin:0; font-size:0.9rem;">A. どちらもECM製剤ですが、ジャルプロスーパーハイドロは特に「リガメント（靭帯）の強化」に優れており、リフトアップ効果をより重視したい方におすすめです。</p>
                 </div>
-                <div style="border-bottom: 1px solid #eee; padding: 20px 0;" class="fade-in-up">
+                <div class="faq-item fade-in-up">
                     <span style="display:block; font-weight:bold; color:var(--text-color); margin-bottom:10px;">Q. 痛みはありますか？</span>
-                    <p style="margin:0; font-size:0.9rem;">A. 薬剤の性質上、注入時に多少の痛みを感じる場合がありますが、極細の針を使用し、冷却や麻酔クリームを併用することで痛みを最小限に抑えています。</p>
+                    <p style="margin:0; font-size:0.9rem;">A. 薬剤の性質上、多少の痛みを感じる場合がありますが、極細の針を使用し、冷却や麻酔を併用することで痛みを最小限に抑えています。</p>
                 </div>
-                <div style="border-bottom: 1px solid #eee; padding: 20px 0;" class="fade-in-up">
+                <div class="faq-item fade-in-up">
                     <span style="display:block; font-weight:bold; color:var(--text-color); margin-bottom:10px;">Q. ダウンタイムはどのくらいですか？</span>
-                    <p style="margin:0; font-size:0.9rem;">A. 注入部位に蚊に刺されたような膨らみが出ることがありますが、数時間〜翌日には落ち着きます。内出血が出た場合もメイクで隠せる程度です。</p>
+                    <p style="margin:0; font-size:0.9rem;">A. 数時間〜翌日には落ち着きます。内出血が出た場合もメイクで隠せる程度です。</p>
                 </div>
             </div>
         </section>
 
+        <!-- FOOTER CTA -->
         <footer id="reservation">
             <div class="footer-cta-box fade-in-up">
-                <h2 style="color: var(--text-color); font-size: 1.6rem; margin-bottom: 20px;">10年後も、<br>好きな肌で。</h2>
+                <h2 style="color: var(--text-color); font-size: 1.6rem; margin-bottom: 20px;">10年後も、<br>好きな肌で.</h2>
                 <p style="color: #666; margin-bottom: 30px;">阿部舞香医師が、<br>あなたの「なりたい」を叶えます。</p>
                 <a href="#" class="btn btn-large">無料カウンセリング予約</a>
                 <p style="margin-top: 15px; color: #999;"><small>LINE予約も受付中</small></p>
             </div>
-            
             <div class="container fade-in-up footer-info">
-                <!-- 実際のフッターロゴ -->
                 <img src="https://firstclinic-tokyo.com/fc/wp-content/themes/fc/assets/images/logo.png" alt="First Clinic" class="footer-logo">
-                
                 <p>〒106-0032<br>東京都港区六本木5-1-3<br>ゴトウビルディング1st 8F</p>
                 <p>六本木駅 3番出口 徒歩1分</p>
                 <p>TEL 03-6432-9906</p>
@@ -781,11 +904,10 @@
             </div>
         </footer>
 
-    </div><!-- End of Mobile Wrapper -->
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // フェードインアニメーション
             const observerOptions = {
                 root: null,
                 rootMargin: '0px 0px -50px 0px',
@@ -801,7 +923,7 @@
                 });
             }, observerOptions);
 
-            const fadeElements = document.querySelectorAll('.fade-in-up');
+            const fadeElements = document.querySelectorAll('.fade-in-up, .feature-card, .insta-link');
             fadeElements.forEach(el => observer.observe(el));
         });
     </script>
