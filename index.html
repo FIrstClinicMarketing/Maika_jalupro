@@ -32,24 +32,36 @@
         body {
             font-family: var(--font-mincho);
             color: var(--text-color);
-            background-color: #e6e6e6;
+            /* デフォルトは白背景（モバイル用） */
+            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
             line-height: 1.8;
             -webkit-font-smoothing: antialiased;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
         }
 
-        /* --- Mobile Wrapper --- */
+        /* --- Mobile Wrapper (Responsive) --- */
         .mobile-wrapper {
             width: 100%;
-            max-width: 430px;
+            /* モバイルでは横幅いっぱい */
+            max-width: 100%;
             background-color: var(--bg-color);
-            box-shadow: 0 0 60px rgba(0,0,0,0.15);
             position: relative;
             overflow-x: hidden;
+            margin: 0 auto;
+        }
+
+        /* PC・タブレット等、広い画面での表示調整 */
+        @media (min-width: 768px) {
+            body {
+                background-color: #e6e6e6; /* 外側をグレーに */
+                padding: 40px 0;
+            }
+            .mobile-wrapper {
+                max-width: 500px; /* LPらしい幅に制限 */
+                box-shadow: 0 0 60px rgba(0,0,0,0.15);
+                border-radius: 12px;
+            }
         }
 
         h1, h2, h3, h4 {
@@ -552,7 +564,6 @@
             color: var(--text-color);
         }
 
-        /* 初回限定バッジ */
         .price-badge {
             display: inline-block;
             background: var(--primary-color);
@@ -566,7 +577,6 @@
             font-family: var(--font-gothic);
         }
 
-        /* 料金の数字部分 */
         .price-num {
             font-family: var(--font-en-serif);
             font-size: 1.8rem;
@@ -574,12 +584,10 @@
             line-height: 1;
         }
 
-        /* 強調用の大きな数字 */
         .price-num.large {
             font-size: 2.4rem;
         }
 
-        /* 料金の単位部分（円） */
         .price-unit {
             font-family: var(--font-mincho);
             font-size: 1rem;
